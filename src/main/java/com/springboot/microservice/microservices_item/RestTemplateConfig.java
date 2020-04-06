@@ -1,6 +1,5 @@
 package com.springboot.microservice.microservices_item;
 
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -9,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 public class RestTemplateConfig {
 
 	@Bean
-	@LoadBalanced
+//	@LoadBalanced (Balanceador de Ribbon, en este caso esta comentado porque eureka lo maneja automaticamente)
 	public RestTemplate clientRestTemplate() {
 		return new RestTemplate();
 	}

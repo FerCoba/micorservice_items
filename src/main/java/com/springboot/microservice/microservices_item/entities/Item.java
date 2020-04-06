@@ -1,6 +1,7 @@
 package com.springboot.microservice.microservices_item.entities;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.springboot.microservice.servicec_commons.model.entities.Product;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

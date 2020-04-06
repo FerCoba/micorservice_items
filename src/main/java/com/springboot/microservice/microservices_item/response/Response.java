@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.springboot.microservice.microservices_item.entities.Item;
-import com.springboot.microservice.microservices_item.entities.Product;
+import com.springboot.microservice.servicec_commons.model.entities.Product;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,4 +20,5 @@ public class Response {
 	private String message;
 	private Item item;
 	private List<Item> items;
+	private Product product;
 }
