@@ -51,7 +51,8 @@ public class ItemController {
 	}
 
 	@GetMapping("id/{id}/quantity/{quantity}/obtainInformationItemById")
-	public ResponseEntity<Response> obtainInformationItemById(@PathVariable Long id, @PathVariable Integer quantity) {
+	public ResponseEntity<Response> obtainInformationItemById(@PathVariable Long id, @PathVariable Integer quantity)
+			throws Exception500Status {
 		LOGGER.info(ENTRY_METHOD_MESSAGE, "obtainInformationItemById");
 		Item item = itemSercice.obtainInformationItemById(id, quantity);
 
@@ -62,11 +63,11 @@ public class ItemController {
 						HttpStatus.OK);
 	}
 
-	@PostMapping("/insertNewProduct")
-	public ResponseEntity<Response> insertNewProduct(@RequestBody Product parameters) {
-		LOGGER.info(ENTRY_METHOD_MESSAGE, "insertNewProduct");
-		Product product = itemSercice.insertNewProduct(parameters);
-		LOGGER.info(EXIT_METHOD, "obtainInformationItemById");
+	@PostMapping("/createNewProduct")
+	public ResponseEntity<Response> createNewProduct(@RequestBody Product parameters) throws Exception500Status {
+		LOGGER.info(ENTRY_METHOD_MESSAGE, "createNewProduct");
+		Product product = itemSercice.createNewProduct(parameters);
+		LOGGER.info(EXIT_METHOD, "createNewProduct");
 		return product == null ? new ResponseEntity<>(
 				new Response(String.valueOf(HttpStatus.OK.value()), "Not data Found", null, null, null), HttpStatus.OK)
 				: new ResponseEntity<>(
@@ -75,7 +76,7 @@ public class ItemController {
 	}
 
 	@DeleteMapping("/deleteProduct/{productId}")
-	public ResponseEntity<Response> deleteProduct(@PathVariable("productId") Long productId) {
+	public ResponseEntity<Response> deleteProduct(@PathVariable("productId") Long productId) throws Exception500Status {
 		LOGGER.info(ENTRY_METHOD_MESSAGE, "deleteProduct");
 		itemSercice.deleteProduct(productId);
 		LOGGER.info(EXIT_METHOD, "deleteProduct");
