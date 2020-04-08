@@ -59,10 +59,10 @@ public class ItemService {
 		return new Item(product.getProduct(), quantity);
 	}
 
-	public Product insertNewProduct(Product product) {
+	public Product createNewProduct(Product product) {
 		LOGGER.info(ENTRY_METHOD_MESSAGE, "insertNewProduct");
-		LOGGER.info(GET_METHOD_MESSAGE, "restTemplateDto.insertNewProduct(product)", "for get info.");
-		return restTemplateDto.insertNewProduct(product);
+		LOGGER.info(GET_METHOD_MESSAGE, "restTemplateDto.createNewProduct(product)", "for get info.");
+		return restTemplateDto.createNewProduct(product);
 	}
 
 	public void deleteProduct(Long productId) {
