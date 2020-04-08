@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.DispatcherServlet;
 
 @EnableCircuitBreaker
 @EnableEurekaClient
@@ -17,6 +19,13 @@ public class MicroserviceItemApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MicroserviceItemApplication.class, args);
+	}
+
+	@Bean
+	DispatcherServlet dispatcherServlet () {
+	    DispatcherServlet ds = new DispatcherServlet();
+	    ds.setThrowExceptionIfNoHandlerFound(true);
+	    return ds;
 	}
 
 }

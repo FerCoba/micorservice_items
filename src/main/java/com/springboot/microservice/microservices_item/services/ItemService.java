@@ -3,6 +3,8 @@ package com.springboot.microservice.microservices_item.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +18,20 @@ import com.springboot.microservice.servicec_commons.model.entities.Product;
 @Service
 public class ItemService {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(ItemService.class);
+	private static final String ENTRY_METHOD_MESSAGE = "entry in method {}.";
+	private static final String GET_METHOD_MESSAGE = "get method {} {}.";
+	
+
 	@Autowired
 	RestTemplateDto restTemplateDto;
-	
-	@HystrixCommand(defaultFallback = "exceptionMethod")
+
+	@HystrixCommand(defaultFallback = "exceptionMethodObtainInformationAllItems")
 	public List<Item> obtainInformationAllItems() {
+
+		LOGGER.info(ENTRY_METHOD_MESSAGE, "obtainInformationAllItems");
+
+		LOGGER.info(GET_METHOD_MESSAGE, "restTemplateDto.obtainInformationAllProducts()", "for get info.");
 		List<ResponseRestTemplate> products = restTemplateDto.obtainInformationAllProducts();
 		List<Product> productsList = products.listIterator().next().getProducts();
 
@@ -33,21 +44,31 @@ public class ItemService {
 		}
 		return productsList.stream().map(pr -> new Item(pr, 0)).collect(Collectors.toList());
 	}
-	//en el caso de que el servicio microservice_product retorne un error el siguiente metodo debe de ejecutarse
-	public List<Item> exceptionMethod() throws Exception500Status {
+
+	// en el caso de que el servicio microservice_product retorne un error el
+	// siguiente metodo debe de ejecutarse
+	public List<Item> exceptionMethodObtainInformationAllItems() throws Exception500Status {
 		throw new Exception500Status();
 	}
-	
+
 	public Item obtainInformationItemById(Long productId, Integer quantity) {
+		LOGGER.info(ENTRY_METHOD_MESSAGE, "obtainInformationItemById");
+
+		LOGGER.info(GET_METHOD_MESSAGE, "restTemplateDto.obtainInformationByProductId(productId)", "for get info.");
 		ResponseRestTemplate product = restTemplateDto.obtainInformationByProductId(productId);
 		return new Item(product.getProduct(), quantity);
 	}
-	
+
 	public Product insertNewProduct(Product product) {
+		LOGGER.info(ENTRY_METHOD_MESSAGE, "insertNewProduct");
+		LOGGER.info(GET_METHOD_MESSAGE, "restTemplateDto.insertNewProduct(product)", "for get info.");
 		return restTemplateDto.insertNewProduct(product);
 	}
-	
-	public void deleteProduct(Long productId ) {
+
+	public void deleteProduct(Long productId) {
+		LOGGER.info(ENTRY_METHOD_MESSAGE, "deleteProduct");
+
+		LOGGER.info(GET_METHOD_MESSAGE, "restTemplateDto.deleteProduct(productId)", "for get info.");
 		restTemplateDto.deleteProduct(productId);
 	}
 

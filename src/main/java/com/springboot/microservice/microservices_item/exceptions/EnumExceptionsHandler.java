@@ -15,8 +15,7 @@ public enum EnumExceptionsHandler {
 
 	THROW_EXCEPTION("NoHandlerFoundException", "NoSuchElementException", "NullPointerException",
 			"AccessDeniedException", "NumberFormatException", "IllegalArgumentException",
-			"InvalidDataAccessResourceUsageException", "ConstraintViolationException", "Exception500Status", "BadRequest", "ZuulException",
-			"NotFound", "HystrixRuntimeException") {
+			"InvalidDataAccessResourceUsageException", "ConstraintViolationException", "Exception500Status", "NoHandlerFoundException") {
 
 		private Object conversion(Object obj) {
 
@@ -36,9 +35,8 @@ public enum EnumExceptionsHandler {
 			if (THROW_EXCEPTION.getValues().contains((tipoException))) {
 
 				switch (tipoException) {
-				case "NotFound":
-					resp = new ResponseError(HttpStatus.NOT_FOUND,
-							"the resource not exist.");
+				case "NoHandlerFoundException":
+					resp = new ResponseError(HttpStatus.NOT_FOUND, "the resource not exist.");
 					return new ResponseEntity<>(conversion(resp), HttpStatus.NOT_FOUND);
 				case "ZuulException":
 					resp = new ResponseError(HttpStatus.INTERNAL_SERVER_ERROR,
