@@ -21,7 +21,6 @@ public class ItemService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ItemService.class);
 	private static final String ENTRY_METHOD_MESSAGE = "entry in method {}.";
 	private static final String GET_METHOD_MESSAGE = "get method {} {}.";
-	
 
 	@Autowired
 	RestTemplateDto restTemplateDto;
@@ -60,8 +59,8 @@ public class ItemService {
 	}
 
 	public Product createNewProduct(Product product) {
-		LOGGER.info(ENTRY_METHOD_MESSAGE, "insertNewProduct");
-		LOGGER.info(GET_METHOD_MESSAGE, "restTemplateDto.createNewProduct(product)", "for get info.");
+		LOGGER.info(ENTRY_METHOD_MESSAGE, "createNewProduct");
+		LOGGER.info(GET_METHOD_MESSAGE, "restTemplateDto.insertNewProduct(product)", "for get info.");
 		return restTemplateDto.createNewProduct(product);
 	}
 

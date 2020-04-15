@@ -29,21 +29,21 @@ public class RestTemplateDto {
 
 	public List<ResponseRestTemplate> obtainInformationAllProducts() {
 
-		LOGGER.info(ENTRY_METHOD_MESSAGE, "obtainInformationAllProducts");
+		LOGGER.info(GET_METHOD_MESSAGE, "obtainInformationAllProducts", "for get info.");
 
 		LOGGER.info(GET_METHOD_MESSAGE, "http://192.168.99.100:8090/api/product/obtainInformationAllProducts",
 				"for get info.");
 
 		List<ResponseRestTemplate> productsList = Arrays.asList(restTemplateConfig.clientRestTemplate().getForObject(
 				"http://192.168.99.100:8090/api/product/obtainInformationAllProducts", ResponseRestTemplate.class));
+
 		productsList.removeIf(prod -> prod.getProducts().isEmpty());
 		return productsList;
 	}
 
 	public ResponseRestTemplate obtainInformationByProductId(Long productId) {
 
-		LOGGER.info(ENTRY_METHOD_MESSAGE, "obtainInformationByProductId");
-
+		LOGGER.info(GET_METHOD_MESSAGE, "obtainProductInformation", " for get info.");
 		Map<String, String> param = new HashMap<>();
 		param.put("productId", productId.toString());
 		LOGGER.info(GET_METHOD_MESSAGE, "/obtainProductInformation/{productId}", "for get info.");
@@ -55,7 +55,7 @@ public class RestTemplateDto {
 
 	public Product createNewProduct(Product product) {
 
-		LOGGER.info(ENTRY_METHOD_MESSAGE, "createNewProduct");
+		LOGGER.info(GET_METHOD_MESSAGE, "createNewProduct", "for create create product.");
 
 		HttpEntity<Product> params = new HttpEntity<>(product);
 
@@ -63,6 +63,7 @@ public class RestTemplateDto {
 
 		ResponseEntity<ResponseRestTemplate> response = restTemplateConfig.clientRestTemplate().exchange(
 				"http://192.168.99.100:8090/api/product/createNewProduct", HttpMethod.POST, params,
+
 				ResponseRestTemplate.class);
 		return response.getBody().getProduct();
 
@@ -70,7 +71,7 @@ public class RestTemplateDto {
 
 	public void deleteProduct(Long productId) {
 
-		LOGGER.info(ENTRY_METHOD_MESSAGE, "deleteProduct");
+		LOGGER.info(GET_METHOD_MESSAGE, " deleteProduct", " for delete product.");
 
 		Map<String, String> param = new HashMap<>();
 		param.put("productId", productId.toString());
