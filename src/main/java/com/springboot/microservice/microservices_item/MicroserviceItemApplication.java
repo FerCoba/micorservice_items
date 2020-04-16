@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import org.springframework.web.servlet.DispatcherServlet;
 
 @EnableCircuitBreaker
@@ -27,5 +28,4 @@ public class MicroserviceItemApplication {
 	    ds.setThrowExceptionIfNoHandlerFound(true);
 	    return ds;
 	}
-
 }

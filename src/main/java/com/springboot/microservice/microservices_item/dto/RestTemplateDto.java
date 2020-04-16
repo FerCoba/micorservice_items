@@ -48,8 +48,8 @@ public class RestTemplateDto {
 		Map<String, String> param = new HashMap<>();
 		param.put("productId", productId.toString());
 		ResponseRestTemplate product = restTemplateConfig.clientRestTemplate().getForObject(
-				"http://localhost:8090/api/product/obtainProductInformation/{productId}", ResponseRestTemplate.class,
-				param);
+				"http://localhost:8090/api/product/productId/{productId}/obtainProductInformation",
+				ResponseRestTemplate.class, param);
 		return product;
 	}
 
