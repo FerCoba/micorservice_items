@@ -27,5 +27,4 @@ public class MicroserviceItemApplication {
 	    ds.setThrowExceptionIfNoHandlerFound(true);
 	    return ds;
 	}
-
 }

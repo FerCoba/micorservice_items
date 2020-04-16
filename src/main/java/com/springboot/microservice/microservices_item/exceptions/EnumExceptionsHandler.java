@@ -15,7 +15,8 @@ public enum EnumExceptionsHandler {
 
 	THROW_EXCEPTION("NoHandlerFoundException", "NoSuchElementException", "NullPointerException",
 			"AccessDeniedException", "NumberFormatException", "IllegalArgumentException",
-			"InvalidDataAccessResourceUsageException", "ConstraintViolationException", "Exception500Status", "NoHandlerFoundException") {
+			"InvalidDataAccessResourceUsageException", "ConstraintViolationException", "Exception500Status", "NoHandlerFoundException",
+			"Unauthorized") {
 
 		private Object conversion(Object obj) {
 
@@ -32,9 +33,13 @@ public enum EnumExceptionsHandler {
 
 		public ResponseEntity<Object> exceptionBuilder(Exception ex, WebRequest wr, String tipoException) {
 			ResponseError resp = null;
+			
 			if (THROW_EXCEPTION.getValues().contains((tipoException))) {
 
 				switch (tipoException) {
+				case "Unauthorized":
+					resp = new ResponseError(HttpStatus.UNAUTHORIZED, "authentication is required.");
+					return new ResponseEntity<>(conversion(resp), HttpStatus.UNAUTHORIZED);
 				case "NoHandlerFoundException":
 					resp = new ResponseError(HttpStatus.NOT_FOUND, "the resource not exist.");
 					return new ResponseEntity<>(conversion(resp), HttpStatus.NOT_FOUND);

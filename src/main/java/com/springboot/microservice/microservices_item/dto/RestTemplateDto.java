@@ -48,7 +48,7 @@ public class RestTemplateDto {
 		param.put("productId", productId.toString());
 		LOGGER.info(GET_METHOD_MESSAGE, "/obtainProductInformation/{productId}", "for get info.");
 		ResponseRestTemplate product = restTemplateConfig.clientRestTemplate().getForObject(
-				"http://192.168.99.100:8090/api/product/obtainProductInformation/{productId}",
+				"http://192.168.99.100:8090/api/product/productId/{productId}/obtainProductInformation",
 				ResponseRestTemplate.class, param);
 		return product;
 	}
